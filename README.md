@@ -1,37 +1,34 @@
-# lens-multi-pod-logs README
+# Multi Pod Logs Lens Extension
 
-This is the README for your extension "lens-multi-pod-logs". After writing up a brief description, we recommend including the following sections.
+A [Lens](https://k8slens.dev) (or [OpenLens](https://github.com/lensapp/lens)) extension that enables you to see logs from multiple pods *(and multiple containers within the pod)* on Kubernetes.
 
-## Features
+## 🚧 Requirements
+- Lens (or OpenLens) `>= 6.0.0`
+- [stern](https://github.com/stern/stern/releases) `>= 1.23.0`
+> ⚠️ This extension uses `stern` under the hood, so it needs to be installed on your computer for the extension to work.
+> If you don't know how to install it you can follow [these steps](STERN.md).
+
+## 🧰 Installing
+Just make sure Lens is running, and follow these simple steps:
+
+ 1. Go to Extensions view (`Menu -> File -> Extensions`)
+ 2. Enter the name of this extension, `@andrea-falco/lens-multi-pod-logs`
+ 3. Click on the **Install** button
+ 4. Make sure the extension is enabled
+
+![install-by-name](img/install.png)
 
 Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
 
-For example if there is an image subfolder under your extension project workspace:
+## 🚀 Features
+After completing the installation, you will see a new menu item for Deployments:
 
-\!\[feature X\]\(images/feature-x.png\)
+![install-by-name](img/deployment-menu.png)
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+The new action will open a new terminal where all the logs coming from all the containers of all the pods of the deployment will be shown.
 
-## Requirements
+## Upgrading
+To upgrade to a newer release, go to the Extensions view, uninstall the extension, and then re-install it again.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+## Uninstalling
+Go to the Lens Extensions view and click the **Uninstall** button next to this extension.
