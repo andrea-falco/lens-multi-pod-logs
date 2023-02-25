@@ -1,4 +1,8 @@
+import React from "react";
 import { Renderer } from "@k8slens/extensions";
+import { DeploymentMultiPodLogsMenu } from "./src/deployment-menu";
+
+type Deployment = Renderer.K8sApi.Deployment;
 
 /**
  *
@@ -13,10 +17,26 @@ import { Renderer } from "@k8slens/extensions";
  *
  */
 export default class MultiPodLogsRenderer extends Renderer.LensExtension {
-  /**
-   * onActivate is called when your extension has been successfully enabled.
-   */
+  // Array of objects matching the KubeObjectMenuRegistration interface
+  kubeObjectMenuItems = [
+    {
+      kind: "Deployment",
+      apiVersions: ["apps/v1"],
+      components: {
+        MenuItem: (
+          props: Renderer.Component.KubeObjectMenuProps<Deployment>
+        ) => <DeploymentMultiPodLogsMenu {...props} />,
+      },
+    },
+  ];
+
+  // Enabling extension calls onActivate()
   onActivate() {
-    console.log("activated");
+    console.log("lens-multi-pod-logs extension | activated");
+  }
+
+  // Disabling extension calls onDeactivate()
+  onDeactivate() {
+    console.log("lens-multi-pod-logs extension | de-activated");
   }
 }
