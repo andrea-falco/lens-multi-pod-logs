@@ -40,7 +40,7 @@ Below you can find a quick guide on how to install `stern`, either manually or v
 4. Edit the `PATH` for your account
 	```
 	setx PATH "C:\bin;%PATH%"
-  ```
+	```
 6.  **Restart** your terminal
 
 #### Windows (GUI)
