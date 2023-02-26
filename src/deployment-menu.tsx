@@ -150,13 +150,13 @@ export class DeploymentMultiPodLogsMenu extends React.Component<
   }
 
   private openTerminal(title: string, command: string) {
-    const shell = Renderer.Component.createTerminalTab({
+    const tab = Renderer.Component.createTerminalTab({
       title: title,
     });
 
     Renderer.Component.terminalStore.sendCommand(command, {
       enter: true,
-      tabId: shell.id,
+      tabId: tab.id,
     });
 
     Renderer.Navigation.hideDetails();
