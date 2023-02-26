@@ -1,35 +1,34 @@
+export interface SternFlags {
+  allNamespaces?: boolean; // If present, tail across all namespaces. A specific namespace is ignored even if specified with --namespace.
+  color?: string; // Force set color output. 'auto':  colorize if tty attached, 'always': always colorize, 'never': never colorize. (default "auto")
+  completion?: string; // Output stern command-line completion code for the specified shell. Can be 'bash', 'zsh' or 'fish'.
+  container?: string; // Container name when multiple containers in pod. (regular expression) (default ".*")
+  containerState?: string; // Tail containers with state in running, waiting or terminated. To specify multiple states, repeat this or set comma-separated value. (default [running])
+  context?: string; // Kubernetes context to use. Default to current context configured in kubeconfig.
+  ephemeralContainers?: boolean; // Include or exclude ephemeral containers. (default true)
+  exclude?: string; // Log lines to exclude. (regular expression)
+  excludeContainer?: string; // Container name to exclude when multiple containers in pod. (regular expression)
+  excludePod?: string; // Pod name to exclude. (regular expression)
+  fieldSelector?: string; // Selector (field query) to filter on. If present, default to ".*" for the pod-query.
+  include?: string; // Log lines to include. (regular expression)
+  initContainers?: boolean; // Include or exclude init containers. (default true)
+  kubeConfig?: string; // Path to kubeconfig file to use. Default to KUBECONFIG variable then ~/.kube/config path.
+  namespace?: string; // Kubernetes namespace to use. Default to namespace configured in kubernetes context. To specify multiple namespaces, repeat this or set comma-separated value.
+  noFollow?: boolean; // Exit when all logs have been shown.
+  onlyLogLines?: boolean; // Print only log lines
+  output?: string; // Specify predefined template. Currently support: [default, raw, json, extjson, ppextjson] (default "default")
+  prompt?: string; // Toggle interactive prompt for selecting 'app.kubernetes.io/instance' label values.
+  selector?: string; // Selector (label query) to filter on. If present, default to ".*" for the pod-query.
+  since?: string; // Return logs newer than a relative duration like 5s, 2m, or 3h. (default 48h0m0s)
+  tail?: number; // The number of lines from the end of the logs to show. Defaults to -1, showing all logs. (default -1)
+  template?: string; // Template to use for log lines, leave empty to use --output flag.
+  timestamps?: boolean; // Print timestamps.
+  timezone?: string; // Set timestamps to specific timezone. (default "Local")
+  verbosity?: number; // Number of the log level verbosity
+}
+
 export class SternCmd {
-  public static generateCmd(
-    query: string,
-    flags?: {
-      allNamespaces?: boolean; // If present, tail across all namespaces. A specific namespace is ignored even if specified with --namespace.
-      color?: string; // Force set color output. 'auto':  colorize if tty attached, 'always': always colorize, 'never': never colorize. (default "auto")
-      completion?: string; // Output stern command-line completion code for the specified shell. Can be 'bash', 'zsh' or 'fish'.
-      container?: string; // Container name when multiple containers in pod. (regular expression) (default ".*")
-      containerState?: string; // Tail containers with state in running, waiting or terminated. To specify multiple states, repeat this or set comma-separated value. (default [running])
-      context?: string; // Kubernetes context to use. Default to current context configured in kubeconfig.
-      ephemeralContainers?: boolean; // Include or exclude ephemeral containers. (default true)
-      exclude?: string; // Log lines to exclude. (regular expression)
-      excludeContainer?: string; // Container name to exclude when multiple containers in pod. (regular expression)
-      excludePod?: string; // Pod name to exclude. (regular expression)
-      fieldSelector?: string; // Selector (field query) to filter on. If present, default to ".*" for the pod-query.
-      include?: string; // Log lines to include. (regular expression)
-      initContainers?: boolean; // Include or exclude init containers. (default true)
-      kubeConfig?: string; // Path to kubeconfig file to use. Default to KUBECONFIG variable then ~/.kube/config path.
-      namespace?: string; // Kubernetes namespace to use. Default to namespace configured in kubernetes context. To specify multiple namespaces, repeat this or set comma-separated value.
-      noFollow?: boolean; // Exit when all logs have been shown.
-      onlyLogLines?: boolean; // Print only log lines
-      output?: string; // Specify predefined template. Currently support: [default, raw, json, extjson, ppextjson] (default "default")
-      prompt?: string; // Toggle interactive prompt for selecting 'app.kubernetes.io/instance' label values.
-      selector?: string; // Selector (label query) to filter on. If present, default to ".*" for the pod-query.
-      since?: string; // Return logs newer than a relative duration like 5s, 2m, or 3h. (default 48h0m0s)
-      tail?: number; // The number of lines from the end of the logs to show. Defaults to -1, showing all logs. (default -1)
-      template?: string; // Template to use for log lines, leave empty to use --output flag.
-      timestamps?: boolean; // Print timestamps.
-      timezone?: string; // Set timestamps to specific timezone. (default "Local")
-      verbosity?: number; // Number of the log level verbosity
-    }
-  ): string {
+  public static generateCmd(query: string, flags?: SternFlags): string {
     const cmdParts = ["stern", query];
 
     if (flags != null) {
