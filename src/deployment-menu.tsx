@@ -4,55 +4,57 @@ import { SternCmd } from "./stern";
 
 type Deployment = Renderer.K8sApi.Deployment;
 
-const {
-  Component: { createTerminalTab, terminalStore, MenuItem, Icon },
-  Navigation,
-} = Renderer;
-const { Util, App } = Common;
-
 export class DeploymentMultiPodLogsMenu extends React.Component<
   Renderer.Component.KubeObjectMenuProps<Deployment>
 > {
-  // Current deployment
+  // Get deployment
   deployment = this.props.object;
 
   render() {
-    if (!this.deployment) return null;
-
     // Show menu item only if deployment has at least 1 replica
-    const replicas = this.deployment.getReplicas();
-    if (replicas <= 0) return null;
+    if (!this.deployment || this.deployment.getReplicas() <= 0) {
+      return null;
+    }
 
     // Render menu item UI (and associate onClick action)
     return (
-      <MenuItem onClick={Util.prevDefault(() => this.execStern())}>
-        <Icon
+      <Renderer.Component.MenuItem
+        onClick={Common.Util.prevDefault(() => this.multiPodLogs())}
+      >
+        <Renderer.Component.Icon
           material="playlist_play"
           interactive={this.props.toolbar}
           tooltip="Multi Pod Logs"
         />
         <span className="title">Multi Pod Logs</span>
-      </MenuItem>
+      </Renderer.Component.MenuItem>
     );
   }
 
-  async execStern() {
+  private multiPodLogs() {
+    // Get deployment name
     const deploymentName = this.deployment.getName();
 
-    const cmd: string = SternCmd.generateCmd(`deployment/${deploymentName}`, {
+    // Generate stern command
+    const cmd = SternCmd.generateCmd(`deployment/${deploymentName}`, {
       color: "never",
       namespace: this.deployment.getNs(),
     });
 
-    const shell = createTerminalTab({
-      title: `Multi Pod Logs | Deployment: ${deploymentName}`,
+    // Open new terminal
+    this.openTerminal(`Multi Pod Logs | Deployment: ${deploymentName}`, cmd);
+  }
+
+  private openTerminal(title: string, command: string) {
+    const shell = Renderer.Component.createTerminalTab({
+      title: title,
     });
 
-    terminalStore.sendCommand(cmd, {
+    Renderer.Component.terminalStore.sendCommand(command, {
       enter: true,
       tabId: shell.id,
     });
 
-    Navigation.hideDetails();
+    Renderer.Navigation.hideDetails();
   }
 }
