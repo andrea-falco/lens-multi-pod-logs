@@ -1,5 +1,6 @@
 import React from "react";
 import { Renderer, Common } from "@k8slens/extensions";
+import { SternCmd } from "./stern";
 
 type Deployment = Renderer.K8sApi.Deployment;
 
@@ -12,20 +13,22 @@ const { Util, App } = Common;
 export class DeploymentMultiPodLogsMenu extends React.Component<
   Renderer.Component.KubeObjectMenuProps<Deployment>
 > {
+  // Current deployment
+  deployment = this.props.object;
+
   render() {
-    const { object: deployment, toolbar } = this.props;
-    if (!deployment) return null;
+    if (!this.deployment) return null;
 
     // Show menu item only if deployment has at least 1 replica
-    const replicas = deployment.getReplicas();
+    const replicas = this.deployment.getReplicas();
     if (replicas <= 0) return null;
 
-    // Create menu item UI
+    // Render menu item UI (and associate onClick action)
     return (
       <MenuItem onClick={Util.prevDefault(() => this.execStern())}>
         <Icon
           material="playlist_play"
-          interactive={toolbar}
+          interactive={this.props.toolbar}
           tooltip="Multi Pod Logs"
         />
         <span className="title">Multi Pod Logs</span>
@@ -34,37 +37,18 @@ export class DeploymentMultiPodLogsMenu extends React.Component<
   }
 
   async execStern() {
-    const deployment = this.props.object;
-    console.log(deployment);
+    const deploymentName = this.deployment.getName();
 
-    const sternPath = /* App.Preferences.getKubectlPath() || */ "stern";
-    const commandParts = [
-      sternPath,
-      "deployment/" + deployment.getName(),
-      "--color",
-      "never",
-      "--namespace",
-      deployment.getNs(),
-      "--output",
-      "default",
-      "--since",
-      "1s",
-      "--timestamps",
-    ];
-
-    if (false) {
-      commandParts.push("--context", "XXX");
-    }
-
-    if (false) {
-      commandParts.push("--container", "XXX");
-    }
-
-    const shell = createTerminalTab({
-      title: `Multi Pod Logs | Deployment: ${deployment.getName()}`,
+    const cmd: string = SternCmd.generateCmd(`deployment/${deploymentName}`, {
+      color: "never",
+      namespace: this.deployment.getNs(),
     });
 
-    terminalStore.sendCommand(commandParts.join(" "), {
+    const shell = createTerminalTab({
+      title: `Multi Pod Logs | Deployment: ${deploymentName}`,
+    });
+
+    terminalStore.sendCommand(cmd, {
       enter: true,
       tabId: shell.id,
     });
