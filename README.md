@@ -18,12 +18,25 @@ Just make sure Lens is running, and follow these simple steps:
 
 ![install-by-name](img/install.png)
 
+---
+
 ## 🚀 Features
 After completing the installation, you will see a new action **Multi Pod Logs** for Deployments menu:
 
 ![install-by-name](img/deployment-menu.png)
 
 The new action will open a new terminal where all the logs coming from all the containers of all the pods of the deployment will be shown.
+
+## 🎨 Colored logs
+If you're using Windows 10 *(and PowerShell as terminal in Lens)* and you don't see colored pod logs, you can enable colors running this command:
+
+```
+Set-ItemProperty HKCU:\Console VirtualTerminalLevel -Type DWORD 1
+```
+
+Then restart Lens.
+
+---
 
 ## Upgrading
 To upgrade to a newer release, go to the Extensions view, uninstall the extension, and then re-install it again.
