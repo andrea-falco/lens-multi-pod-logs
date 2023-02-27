@@ -18,8 +18,6 @@ Just make sure Lens is running, and follow these simple steps:
 
 ![install-by-name](img/install.png)
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
 ## 🚀 Features
 After completing the installation, you will see a new action **Multi Pod Logs** for Deployments menu:
 
