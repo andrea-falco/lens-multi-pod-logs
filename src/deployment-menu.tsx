@@ -141,7 +141,7 @@ export class DeploymentMultiPodLogsMenu extends React.Component<
       namespace: this.deployment.getNs(),
       excludeContainer: options?.exclude,
       container: options?.include,
-      color: "never",
+      color: "auto",
       since: "1s",
     });
 
