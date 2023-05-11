@@ -45,7 +45,7 @@ export class DeploymentMultiPodLogsMenu extends React.Component<
   }
 
   render() {
-    const { pods, containerNames } = this.state;
+    const { containerNames } = this.state;
 
     // Show menu item only if deployment has at least 1 replica
     if (!this.deployment || this.deployment.getReplicas() <= 0) {

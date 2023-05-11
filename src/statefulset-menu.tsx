@@ -45,7 +45,7 @@ export class StatefulSetMultiPodLogsMenu extends React.Component<
   }
 
   render() {
-    const { pods, containerNames } = this.state;
+    const { containerNames } = this.state;
 
     // Show menu item only if statefulset has at least 1 replica
     if (!this.statefulset || this.statefulset.getReplicas() <= 0) {
