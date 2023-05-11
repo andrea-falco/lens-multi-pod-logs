@@ -1,8 +1,10 @@
 import React from "react";
 import { Renderer } from "@k8slens/extensions";
 import { DeploymentMultiPodLogsMenu } from "./src/deployment-menu";
+import { StatefulSetMultiPodLogsMenu } from "./src/statefulset-menu";
 
 type Deployment = Renderer.K8sApi.Deployment;
+type StatefulSet = Renderer.K8sApi.StatefulSet;
 
 /**
  *
@@ -26,6 +28,15 @@ export default class MultiPodLogsRenderer extends Renderer.LensExtension {
         MenuItem: (
           props: Renderer.Component.KubeObjectMenuProps<Deployment>
         ) => <DeploymentMultiPodLogsMenu {...props} />,
+      },
+    },
+    {
+      kind: "StatefulSet",
+      apiVersions: ["apps/v1"],
+      components: {
+        MenuItem: (
+          props: Renderer.Component.KubeObjectMenuProps<StatefulSet>
+        ) => <StatefulSetMultiPodLogsMenu {...props} />,
       },
     },
   ];
