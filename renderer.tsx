@@ -3,6 +3,11 @@ import { Renderer } from "@k8slens/extensions";
 import { DeploymentMultiPodLogsMenu } from "./src/menu/deployment-menu";
 import { StatefulSetMultiPodLogsMenu } from "./src/menu/statefulset-menu";
 import { DaemonSetMultiPodLogsMenu } from "./src/menu/daemonset-menu";
+import {
+  MultiPodLogsPreferenceHint,
+  MultiPodLogsPreferenceInput,
+} from "./src/preference";
+import { observable } from "mobx";
 
 type Deployment = Renderer.K8sApi.Deployment;
 type StatefulSet = Renderer.K8sApi.StatefulSet;
@@ -21,6 +26,20 @@ type DaemonSet = Renderer.K8sApi.DaemonSet;
  *
  */
 export default class MultiPodLogsRenderer extends Renderer.LensExtension {
+  @observable preference = { enabled: false };
+
+  appPreferences = [
+    {
+      title: "Multi Pod Logs Preferences",
+      components: {
+        Hint: () => <MultiPodLogsPreferenceHint />,
+        Input: () => (
+          <MultiPodLogsPreferenceInput preference={this.preference} />
+        ),
+      },
+    },
+  ];
+
   // Array of objects matching the KubeObjectMenuRegistration interface
   kubeObjectMenuItems = [
     {
