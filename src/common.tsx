@@ -152,13 +152,19 @@ export class MultiPodLogsCommon {
     options?: { exclude?: string; include?: string }
   ) {
     // Generate stern command
-    const cmd = SternCmd.generateCmd(`${resourceType}/${resourceName}`, {
-      namespace: resourceNs,
-      excludeContainer: options?.exclude,
-      container: options?.include,
-      color: "auto",
-      since: "1s",
-    });
+    const cmd = SternCmd.generateCmd(
+      `${resourceType}/${resourceName}`,
+      {
+        namespace: resourceNs,
+        excludeContainer: options?.exclude,
+        container: options?.include,
+        color: "auto",
+        since: "1s",
+      },
+      {
+        krew: false,
+      }
+    );
 
     // Open new terminal
     this.openTerminal(

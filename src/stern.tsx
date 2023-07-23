@@ -27,9 +27,25 @@ export interface SternFlags {
   verbosity?: number; // Number of the log level verbosity
 }
 
+export interface SternOptions {
+  krew?: boolean; // True if stern was installed with Krew plugin manager
+}
+
 export class SternCmd {
-  public static generateCmd(query: string, flags?: SternFlags): string {
-    const cmdParts = ["stern", query];
+  public static generateCmd(
+    query: string,
+    flags?: SternFlags,
+    options?: SternOptions
+  ): string {
+    let prefix = "stern";
+
+    if (options != null) {
+      if (options.krew) {
+        prefix = "kubectl stern";
+      }
+    }
+
+    const cmdParts = [prefix, query];
 
     if (flags != null) {
       if (flags.allNamespaces) {
