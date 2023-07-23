@@ -1,13 +1,15 @@
 import React from "react";
 import { Renderer } from "@k8slens/extensions";
+
 import { DeploymentMultiPodLogsMenu } from "./src/menu/deployment-menu";
 import { StatefulSetMultiPodLogsMenu } from "./src/menu/statefulset-menu";
 import { DaemonSetMultiPodLogsMenu } from "./src/menu/daemonset-menu";
+
+import { sternPreferenceStore } from "./src/preference/stern-preference-store";
 import {
-  MultiPodLogsPreferenceHint,
-  MultiPodLogsPreferenceInput,
-} from "./src/preference";
-import { observable } from "mobx";
+  MultiPodLogsSternPreferenceHint,
+  MultiPodLogsSternPreferenceInput,
+} from "./src/preference/stern-preference";
 
 type Deployment = Renderer.K8sApi.Deployment;
 type StatefulSet = Renderer.K8sApi.StatefulSet;
@@ -26,20 +28,6 @@ type DaemonSet = Renderer.K8sApi.DaemonSet;
  *
  */
 export default class MultiPodLogsRenderer extends Renderer.LensExtension {
-  @observable preference = { enabled: false };
-
-  appPreferences = [
-    {
-      title: "Multi Pod Logs Preferences",
-      components: {
-        Hint: () => <MultiPodLogsPreferenceHint />,
-        Input: () => (
-          <MultiPodLogsPreferenceInput preference={this.preference} />
-        ),
-      },
-    },
-  ];
-
   // Array of objects matching the KubeObjectMenuRegistration interface
   kubeObjectMenuItems = [
     {
@@ -71,13 +59,26 @@ export default class MultiPodLogsRenderer extends Renderer.LensExtension {
     },
   ];
 
+  // Array of objects for extension preferences
+  appPreferences = [
+    {
+      title: "Stern installation mode",
+      components: {
+        Input: () => <MultiPodLogsSternPreferenceInput />,
+        Hint: () => <MultiPodLogsSternPreferenceHint />,
+      },
+    },
+  ];
+
   // Enabling extension calls onActivate()
   onActivate() {
-    console.log("lens-multi-pod-logs extension | activated");
+    console.log("lens-multi-pod-logs renderer | activating...");
+    sternPreferenceStore.loadExtension(this);
+    console.log("lens-multi-pod-logs renderer | activated");
   }
 
   // Disabling extension calls onDeactivate()
   onDeactivate() {
-    console.log("lens-multi-pod-logs extension | de-activated");
+    console.log("lens-multi-pod-logs renderer | de-activated");
   }
 }
