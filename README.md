@@ -21,14 +21,17 @@ Just make sure Lens is running, and follow these simple steps:
 ---
 
 ## 🚀 Features
-After completing the installation, you will see a new action **Multi Pod Logs** for Deployments/StatefulSets menu:
+After completing the installation, you will see a new action **Multi Pod Logs** for the menu below:
+- Deployments
+- StatefulSets
+- DaemonSets
 
 ![install-by-name](img/deployment-menu.png)
 
-The new action will open a new terminal where all the logs coming from all the containers of all the pods of the deployment/statefulset will be shown.
+The new action will open a new terminal where all the logs coming from all the containers of all the pods of the resource will be shown.
 
 ## 🎨 Colored logs
-If you're using Windows 10 *(and PowerShell as terminal in Lens)* and you don't see colored pod logs, you can enable colors running this command:
+If you're using Windows 10/11 *(and PowerShell as terminal in Lens)* and you don't see colored pod logs, you can enable colors running this command:
 
 ```
 Set-ItemProperty HKCU:\Console VirtualTerminalLevel -Type DWORD 1
