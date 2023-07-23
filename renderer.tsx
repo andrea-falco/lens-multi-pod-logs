@@ -2,10 +2,11 @@ import React from "react";
 import { Renderer } from "@k8slens/extensions";
 import { DeploymentMultiPodLogsMenu } from "./src/deployment-menu";
 import { StatefulSetMultiPodLogsMenu } from "./src/statefulset-menu";
+import { DaemonSetMultiPodLogsMenu } from "./src/daemonset-menu";
 
 type Deployment = Renderer.K8sApi.Deployment;
 type StatefulSet = Renderer.K8sApi.StatefulSet;
-
+type DaemonSet = Renderer.K8sApi.DaemonSet;
 /**
  *
  * RendererExtension which extends LensRendererExtension runs in Lens' 'renderer' process (NOT 'main' process)
@@ -37,6 +38,15 @@ export default class MultiPodLogsRenderer extends Renderer.LensExtension {
         MenuItem: (
           props: Renderer.Component.KubeObjectMenuProps<StatefulSet>
         ) => <StatefulSetMultiPodLogsMenu {...props} />,
+      },
+    },
+    {
+      kind: "DaemonSet",
+      apiVersions: ["apps/v1"],
+      components: {
+        MenuItem: (
+          props: Renderer.Component.KubeObjectMenuProps<DaemonSet>
+        ) => <DaemonSetMultiPodLogsMenu {...props} />,
       },
     },
   ];
