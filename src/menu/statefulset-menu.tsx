@@ -1,6 +1,6 @@
 import React from "react";
 import { Renderer } from "@k8slens/extensions";
-import { MultiPodLogsCommon } from "./common";
+import { MultiPodLogsCommon } from "../common";
 
 type StatefulSet = Renderer.K8sApi.StatefulSet;
 type Pod = Renderer.K8sApi.Pod;

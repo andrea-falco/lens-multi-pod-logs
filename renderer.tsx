@@ -1,12 +1,13 @@
 import React from "react";
 import { Renderer } from "@k8slens/extensions";
-import { DeploymentMultiPodLogsMenu } from "./src/deployment-menu";
-import { StatefulSetMultiPodLogsMenu } from "./src/statefulset-menu";
-import { DaemonSetMultiPodLogsMenu } from "./src/daemonset-menu";
+import { DeploymentMultiPodLogsMenu } from "./src/menu/deployment-menu";
+import { StatefulSetMultiPodLogsMenu } from "./src/menu/statefulset-menu";
+import { DaemonSetMultiPodLogsMenu } from "./src/menu/daemonset-menu";
 
 type Deployment = Renderer.K8sApi.Deployment;
 type StatefulSet = Renderer.K8sApi.StatefulSet;
 type DaemonSet = Renderer.K8sApi.DaemonSet;
+
 /**
  *
  * RendererExtension which extends LensRendererExtension runs in Lens' 'renderer' process (NOT 'main' process)

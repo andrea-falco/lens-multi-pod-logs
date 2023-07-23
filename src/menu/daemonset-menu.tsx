@@ -1,8 +1,8 @@
 import React from "react";
 import { Renderer } from "@k8slens/extensions";
-import { MultiPodLogsCommon } from "./common";
+import { MultiPodLogsCommon } from "../common";
 
-type Deployment = Renderer.K8sApi.Deployment;
+type DaemonSet = Renderer.K8sApi.DaemonSet;
 type Pod = Renderer.K8sApi.Pod;
 
 interface State {
@@ -10,19 +10,19 @@ interface State {
   containerNames: Set<string>;
 }
 
-export class DeploymentMultiPodLogsMenu extends React.Component<
-  Renderer.Component.KubeObjectMenuProps<Deployment>,
+export class DaemonSetMultiPodLogsMenu extends React.Component<
+  Renderer.Component.KubeObjectMenuProps<DaemonSet>,
   State
 > {
-  deployment: Deployment;
+  daemonset: DaemonSet;
 
   protected dStore = Renderer.K8sApi.apiManager.getStore(
-    Renderer.K8sApi.deploymentApi
-  ) as Renderer.K8sApi.DeploymentStore;
+    Renderer.K8sApi.daemonSetApi
+  ) as Renderer.K8sApi.DaemonSetStore;
 
-  constructor(props: Renderer.Component.KubeObjectMenuProps<Deployment>) {
+  constructor(props: Renderer.Component.KubeObjectMenuProps<DaemonSet>) {
     super(props);
-    this.deployment = props.object;
+    this.daemonset = props.object;
     this.state = {
       pods: [],
       containerNames: new Set(),
@@ -30,8 +30,8 @@ export class DeploymentMultiPodLogsMenu extends React.Component<
   }
 
   async componentDidMount() {
-    // Get deployment pods
-    const podList = this.dStore.getChildPods(this.deployment);
+    // Get daemonset pods
+    const podList = this.dStore.getChildPods(this.daemonset);
 
     // Get all containers from all pods
     const containerNameList =
@@ -47,19 +47,14 @@ export class DeploymentMultiPodLogsMenu extends React.Component<
   render() {
     const { containerNames } = this.state;
 
-    // Show menu item only if deployment has at least 1 replica
-    if (!this.deployment || this.deployment.getReplicas() <= 0) {
-      return null;
-    }
-
     // Render menu item UI (and associate onClick action)
     return MultiPodLogsCommon.uiMenu(
       this.props,
       containerNames,
-      this.deployment.getNs(),
-      "deployment",
-      this.deployment.getName(),
-      "Deployment"
+      this.daemonset.getNs(),
+      "daemonset",
+      this.daemonset.getName(),
+      "DaemonSet"
     );
   }
 }
