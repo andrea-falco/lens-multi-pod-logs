@@ -5,11 +5,11 @@ import { DeploymentMultiPodLogsMenu } from "./src/menu/deployment-menu";
 import { StatefulSetMultiPodLogsMenu } from "./src/menu/statefulset-menu";
 import { DaemonSetMultiPodLogsMenu } from "./src/menu/daemonset-menu";
 
-import { sternPreferenceStore } from "./src/preference/stern-preference-store";
+import { sternPreferenceStore } from "./src/preference/stern-preference/stern-preference-store";
 import {
+  MultiPodLogsSternPreference,
   MultiPodLogsSternPreferenceHint,
-  MultiPodLogsSternPreferenceInput,
-} from "./src/preference/stern-preference";
+} from "./src/preference/stern-preference/stern-preference";
 
 type Deployment = Renderer.K8sApi.Deployment;
 type StatefulSet = Renderer.K8sApi.StatefulSet;
@@ -62,9 +62,9 @@ export default class MultiPodLogsRenderer extends Renderer.LensExtension {
   // Array of objects for extension preferences
   appPreferences = [
     {
-      title: "Stern installation mode",
+      title: "",
       components: {
-        Input: () => <MultiPodLogsSternPreferenceInput />,
+        Input: () => <MultiPodLogsSternPreference />,
         Hint: () => <MultiPodLogsSternPreferenceHint />,
       },
     },

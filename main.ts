@@ -1,5 +1,5 @@
 import { Main } from "@k8slens/extensions";
-import { sternPreferenceStore } from "./src/preference/stern-preference-store";
+import { sternPreferenceStore } from "./src/preference/stern-preference/stern-preference-store";
 
 /**
  * Main.LensExtension api allows you to access, configure, and customize Lens data add
