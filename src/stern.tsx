@@ -13,6 +13,7 @@ export interface SternFlags {
   include?: string; // Log lines to include. (regular expression)
   initContainers?: boolean; // Include or exclude init containers. (default true)
   kubeConfig?: string; // Path to kubeconfig file to use. Default to KUBECONFIG variable then ~/.kube/config path.
+  maxLogRequests?: number; // Maximum number of concurrent logs to request. Defaults to 50, but 5 when specifying --no-follow (default -1)
   namespace?: string; // Kubernetes namespace to use. Default to namespace configured in kubernetes context. To specify multiple namespaces, repeat this or set comma-separated value.
   noFollow?: boolean; // Exit when all logs have been shown.
   onlyLogLines?: boolean; // Print only log lines
@@ -107,6 +108,9 @@ export class SternCmd {
       }
       if (flags.kubeConfig) {
         cmdParts.push("--kubeconfig", `"${flags.kubeConfig}"`);
+      }
+      if (flags.maxLogRequests) {
+        cmdParts.push("--max-log-requests", `${flags.maxLogRequests}`);
       }
       if (flags.namespace) {
         cmdParts.push("--namespace", flags.namespace);
