@@ -1,7 +1,7 @@
 import React from "react";
 import { Renderer, Common } from "@k8slens/extensions";
 import { SternCmd } from "./stern";
-import { sternPreferenceStore } from "./preference/stern-preference-store";
+import { sternPreferenceStore } from "./preference/stern-preference/stern-preference-store";
 
 const {
   Component: { MenuItem, Icon, SubMenu, StatusBrick },
@@ -161,6 +161,7 @@ export class MultiPodLogsCommon {
         container: options?.include,
         color: "auto",
         since: "1s",
+        maxLogRequests: sternPreferenceStore.maxLogRequests,
       },
       {
         krew: sternPreferenceStore.krew,
