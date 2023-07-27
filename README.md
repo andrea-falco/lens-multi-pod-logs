@@ -1,6 +1,8 @@
 # Multi Pod Logs Lens Extension
 
-<img src="https://img.shields.io/github/license/andrea-falco/lens-multi-pod-logs" /> <img src="https://img.shields.io/npm/dw/%40andrea-falco%2Flens-multi-pod-logs" /> <img src="https://img.shields.io/npm/dt/%40andrea-falco%2Flens-multi-pod-logs" /> [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/A0A8J3CMJ)
+<img src="https://img.shields.io/github/license/andrea-falco/lens-multi-pod-logs" /> <img src="https://img.shields.io/npm/dw/%40andrea-falco%2Flens-multi-pod-logs" /> <img src="https://img.shields.io/npm/dt/%40andrea-falco%2Flens-multi-pod-logs" />
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/A0A8J3CMJ)
 
 A [Lens](https://k8slens.dev) (or [OpenLens](https://github.com/lensapp/lens)) extension that enables you to see logs from multiple pods *(and multiple containers within the pod)* on Kubernetes.
 
