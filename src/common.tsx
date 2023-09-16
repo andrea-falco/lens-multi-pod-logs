@@ -162,6 +162,8 @@ export class MultiPodLogsCommon {
         color: "auto",
         since: "1s",
         maxLogRequests: sternPreferenceStore.maxLogRequests,
+        output: sternPreferenceStore.builtInTemplate,
+        template: sternPreferenceStore.customTemplate,
       },
       {
         krew: sternPreferenceStore.krew,
