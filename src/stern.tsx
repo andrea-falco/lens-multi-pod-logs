@@ -121,7 +121,7 @@ export class SternCmd {
       if (flags.onlyLogLines) {
         cmdParts.push("--only-log-lines");
       }
-      if (flags.output) {
+      if (flags.output && !flags.template) {
         const output = flags.output;
         if (
           output === "default" ||
@@ -146,7 +146,7 @@ export class SternCmd {
         cmdParts.push("--tail", `${flags.tail}`);
       }
       if (flags.template) {
-        cmdParts.push("--template", `"${flags.template}"`);
+        cmdParts.push("--template", `'${flags.template}'`);
       }
       if (flags.timestamps) {
         cmdParts.push("--timestamps");
