@@ -160,7 +160,7 @@ export class MultiPodLogsCommon {
         excludeContainer: options?.exclude,
         container: options?.include,
         color: "auto",
-        since: "1s",
+        since: sternPreferenceStore.since,
         maxLogRequests: sternPreferenceStore.maxLogRequests,
         output: sternPreferenceStore.builtInTemplate,
         template: sternPreferenceStore.customTemplate,

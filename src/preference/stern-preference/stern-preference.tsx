@@ -38,6 +38,22 @@ export class MultiPodLogsSternPreference extends React.Component {
 
         <div style={separatorStyle}></div>
 
+        <SubTitle title="Since" />
+        <Input
+          theme="round-black"
+          type="text"
+          placeholder="1s"
+          value={sternPreferenceStore.since}
+          onChange={(v) => {
+            sternPreferenceStore.since = v;
+          }}
+        />
+        <span style={hintStyle}>
+          Duration (like 5s, 2m, or 3h) from which the logs will be returned
+        </span>
+
+        <div style={separatorStyle}></div>
+
         <SubTitle title="Max Log Requests" />
         <Input
           theme="round-black"
