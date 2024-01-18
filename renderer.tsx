@@ -3,6 +3,7 @@ import { Renderer } from "@k8slens/extensions";
 
 import { DeploymentMultiPodLogsMenu } from "./src/menu/deployment-menu";
 import { StatefulSetMultiPodLogsMenu } from "./src/menu/statefulset-menu";
+import { ReplicaSetMultiPodLogsMenu } from "./src/menu/replicaset-menu";
 import { DaemonSetMultiPodLogsMenu } from "./src/menu/daemonset-menu";
 
 import { sternPreferenceStore } from "./src/preference/stern-preference/stern-preference-store";
@@ -13,6 +14,7 @@ import {
 
 type Deployment = Renderer.K8sApi.Deployment;
 type StatefulSet = Renderer.K8sApi.StatefulSet;
+type ReplicaSet = Renderer.K8sApi.ReplicaSet;
 type DaemonSet = Renderer.K8sApi.DaemonSet;
 
 /**
@@ -46,6 +48,15 @@ export default class MultiPodLogsRenderer extends Renderer.LensExtension {
         MenuItem: (
           props: Renderer.Component.KubeObjectMenuProps<StatefulSet>
         ) => <StatefulSetMultiPodLogsMenu {...props} />,
+      },
+    },
+    {
+      kind: "ReplicaSet",
+      apiVersions: ["apps/v1"],
+      components: {
+        MenuItem: (
+          props: Renderer.Component.KubeObjectMenuProps<ReplicaSet>
+        ) => <ReplicaSetMultiPodLogsMenu {...props} />,
       },
     },
     {
