@@ -29,6 +29,7 @@ Just make sure Lens is running, and follow these simple steps:
 After completing the installation, you will see a new action **Multi Pod Logs** for the menu below:
 - Deployments
 - StatefulSets
+- ReplicaSets
 - DaemonSets
 
 ![multi-pod-logs-menu](img/deployment-menu.png)
