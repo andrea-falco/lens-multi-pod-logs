@@ -156,7 +156,7 @@ export class MultiPodLogsCommon {
     const cmd = SternCmd.generateCmd(
       `${resourceType}/${resourceName}`,
       {
-        namespace: resourceNs,
+        namespace: [resourceNs],
         excludeContainer: options?.exclude,
         container: options?.include,
         color: "auto",
