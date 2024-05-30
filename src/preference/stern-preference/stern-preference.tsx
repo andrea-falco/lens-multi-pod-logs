@@ -16,6 +16,15 @@ export class MultiPodLogsSternPreference extends React.Component {
     };
     const hintStyle = { marginTop: "8px" };
 
+    const timestampOptions = [
+      { value: "no", label: "No Timestamp" },
+      {
+        value: "default",
+        label: 'Default (i.e. "2006-01-02T15:04:05.000000000Z07:00")',
+      },
+      { value: "short", label: 'Short (i.e. "01-02 15:04:05")' },
+    ];
+
     const builtInTemplateOptions = [
       { value: "default", label: "Default" },
       { value: "raw", label: "Raw" },
@@ -35,6 +44,19 @@ export class MultiPodLogsSternPreference extends React.Component {
         >
           Enable the switch if you installed stern via krew package manager
         </Switch>
+
+        <div style={separatorStyle}></div>
+
+        <SubTitle title="Timestamp and Format" />
+        <Select
+          themeName="lens"
+          options={timestampOptions}
+          value={sternPreferenceStore.timestamp}
+          onChange={(v) => {
+            sternPreferenceStore.timestamp = v.value;
+          }}
+        />
+        <span style={hintStyle}>Timestamp format to use.</span>
 
         <div style={separatorStyle}></div>
 

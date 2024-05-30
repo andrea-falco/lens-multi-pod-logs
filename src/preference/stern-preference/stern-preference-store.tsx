@@ -3,6 +3,7 @@ import { observable, makeObservable } from "mobx";
 
 export type MultiPodLogsSternPreferenceModel = {
   krew: boolean;
+  timestamp: string;
   since: string;
   maxLogRequests: number;
   builtInTemplate: string;
@@ -13,6 +14,7 @@ export class MultiPodLogsSternPreferencesStore extends Common.Store
   .ExtensionStore<MultiPodLogsSternPreferenceModel> {
   // Store properties
   @observable krew = false;
+  @observable timestamp = "no";
   @observable since = "1s";
   @observable maxLogRequests = 50;
   @observable builtInTemplate = "";
@@ -25,6 +27,7 @@ export class MultiPodLogsSternPreferencesStore extends Common.Store
       // Store default property values
       defaults: {
         krew: false,
+        timestamp: "no",
         since: "1s",
         maxLogRequests: 50,
         builtInTemplate: "default",
@@ -36,12 +39,14 @@ export class MultiPodLogsSternPreferencesStore extends Common.Store
 
   protected fromStore({
     krew,
+    timestamp,
     since,
     maxLogRequests,
     builtInTemplate,
     customTemplate,
   }: MultiPodLogsSternPreferenceModel): void {
     this.krew = krew;
+    this.timestamp = timestamp;
     this.since = since;
     this.maxLogRequests = maxLogRequests;
     this.builtInTemplate = builtInTemplate;
@@ -51,6 +56,7 @@ export class MultiPodLogsSternPreferencesStore extends Common.Store
   toJSON(): MultiPodLogsSternPreferenceModel {
     return {
       krew: this.krew,
+      timestamp: this.timestamp,
       since: this.since,
       maxLogRequests: this.maxLogRequests,
       builtInTemplate: this.builtInTemplate,

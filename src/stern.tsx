@@ -180,7 +180,7 @@ export class SternCmd {
       if (flags.timestamps) {
         const timestamps = flags.timestamps;
         if (timestamps === "default" || timestamps === "short") {
-          cmdParts.push(`--timestamps=${timestamps}`); // TODO AF - Add option on Lens settings
+          cmdParts.push(`--timestamps=${timestamps}`);
         }
       }
       if (flags.timezone) {
