@@ -159,7 +159,6 @@ export class MultiPodLogsCommon {
         namespace: [resourceNs],
         excludeContainer: options?.exclude,
         container: options?.include,
-        color: "auto",
         timestamps: sternPreferenceStore.timestamp,
         since: sternPreferenceStore.since,
         maxLogRequests: sternPreferenceStore.maxLogRequests,
