@@ -10,6 +10,12 @@ const {
 @observer
 export class MultiPodLogsSternPreference extends React.Component {
   render() {
+    const dividerStyle = {
+      height: "1px",
+      borderTop: "thin solid var(--hrColor)",
+      marginTop: "40px",
+      marginBottom: "40px",
+    };
     const separatorStyle = {
       minWidth: "40px",
       minHeight: "40px",
@@ -45,7 +51,7 @@ export class MultiPodLogsSternPreference extends React.Component {
           Enable the switch if you installed stern via krew package manager
         </Switch>
 
-        <div style={separatorStyle}></div>
+        <div style={dividerStyle}></div>
 
         <SubTitle title="Timestamp and Format" />
         <Select
@@ -74,24 +80,7 @@ export class MultiPodLogsSternPreference extends React.Component {
           Duration (like 5s, 2m, or 3h) from which the logs will be returned
         </span>
 
-        <div style={separatorStyle}></div>
-
-        <SubTitle title="Max Log Requests" />
-        <Input
-          theme="round-black"
-          type="number"
-          validators={InputValidators.isNumber}
-          min={1}
-          value={sternPreferenceStore.maxLogRequests.toString()}
-          onChange={(v) => {
-            sternPreferenceStore.maxLogRequests = Number(v);
-          }}
-        />
-        <span style={hintStyle}>
-          Maximum number of concurrent logs to request.
-        </span>
-
-        <div style={separatorStyle}></div>
+        <div style={dividerStyle}></div>
 
         <SubTitle title="Built-in Template" />
         <Select
@@ -118,6 +107,23 @@ export class MultiPodLogsSternPreference extends React.Component {
         />
         <span style={hintStyle}>
           Custom template to use, leave empty to use the built-in template.
+        </span>
+
+        <div style={dividerStyle}></div>
+
+        <SubTitle title="Max Log Requests" />
+        <Input
+          theme="round-black"
+          type="number"
+          validators={InputValidators.isNumber}
+          min={1}
+          value={sternPreferenceStore.maxLogRequests.toString()}
+          onChange={(v) => {
+            sternPreferenceStore.maxLogRequests = Number(v);
+          }}
+        />
+        <span style={hintStyle}>
+          Maximum number of concurrent logs to request.
         </span>
       </section>
     );
