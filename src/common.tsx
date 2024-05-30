@@ -159,6 +159,7 @@ export class MultiPodLogsCommon {
         namespace: [resourceNs],
         excludeContainer: options?.exclude,
         container: options?.include,
+        diffContainer: true,
         timestamps: sternPreferenceStore.timestamp,
         since: sternPreferenceStore.since,
         maxLogRequests: sternPreferenceStore.maxLogRequests,
