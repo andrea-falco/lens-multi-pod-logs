@@ -9,7 +9,7 @@ A [Lens](https://k8slens.dev) (or [OpenLens](https://github.com/lensapp/lens)) e
 
 ## 🚧 Requirements
 - Lens (or OpenLens) `>= 6.0.0`
-- [stern](https://github.com/stern/stern/releases) `>= 1.23.0`
+- [stern](https://github.com/stern/stern/releases) `>= 1.30.0`
 > ⚠️ This extension uses `stern` under the hood, so it needs to be installed on your computer for the extension to work.
 > If you don't know how to install it you can follow [these steps](STERN.md).
 
