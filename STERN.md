@@ -1,6 +1,6 @@
 # stern
 
-Lens Multi Pod Logs extension uses [stern](https://github.com/stern/stern) `>= 1.23.0` under the hood, so it needs to be installed on your computer for the extension to work.
+Lens Multi Pod Logs extension uses [stern](https://github.com/stern/stern) `>= 1.30.0` under the hood, so it needs to be installed on your computer for the extension to work.
 
 ## Installation
 Below you can find a quick guide on how to install `stern`, either manually or via a package manager.
