@@ -1,7 +1,7 @@
 {
   "name": "@andrea-falco/lens-multi-pod-logs",
   "description": "Multi pod and container logs for Lens",
-  "version": "0.3.7",
+  "version": "1.0.0",
   "author": "Andrea Falco",
   "publisher": "Andrea Falco",
   "repository": {
