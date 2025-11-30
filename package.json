@@ -13,7 +13,8 @@
   "renderer": "dist/renderer.js",
   "engines": {
     "node": ">=16 <17",
-    "lens": "^6.0.0"
+    "lens": "^6.0.0",
+    "freelens": "^1.0.0"
   },
   "scripts": {
     "start": "NODE_ENV=development webpack --watch",
