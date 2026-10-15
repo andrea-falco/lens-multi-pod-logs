@@ -5,6 +5,7 @@ import { DeploymentMultiPodLogsMenu } from "./src/menu/deployment-menu";
 import { StatefulSetMultiPodLogsMenu } from "./src/menu/statefulset-menu";
 import { ReplicaSetMultiPodLogsMenu } from "./src/menu/replicaset-menu";
 import { DaemonSetMultiPodLogsMenu } from "./src/menu/daemonset-menu";
+import { JobMultiPodLogsMenu } from "./src/menu/job-menu";
 
 import { sternPreferenceStore } from "./src/preference/stern-preference/stern-preference-store";
 import {
@@ -16,6 +17,7 @@ type Deployment = Renderer.K8sApi.Deployment;
 type StatefulSet = Renderer.K8sApi.StatefulSet;
 type ReplicaSet = Renderer.K8sApi.ReplicaSet;
 type DaemonSet = Renderer.K8sApi.DaemonSet;
+type Job = Renderer.K8sApi.Job;
 
 /**
  *
@@ -66,6 +68,15 @@ export default class MultiPodLogsRenderer extends Renderer.LensExtension {
         MenuItem: (
           props: Renderer.Component.KubeObjectMenuProps<DaemonSet>
         ) => <DaemonSetMultiPodLogsMenu {...props} />,
+      },
+    },
+    {
+      kind: "Job",
+      apiVersions: ["batch/v1"],
+      components: {
+        MenuItem: (
+          props: Renderer.Component.KubeObjectMenuProps<Job>
+        ) => <JobMultiPodLogsMenu {...props} />,
       },
     },
   ];

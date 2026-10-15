@@ -31,6 +31,7 @@ After completing the installation, you will see a new action **Multi Pod Logs** 
 - StatefulSets
 - ReplicaSets
 - DaemonSets
+- Jobs
 
 ![multi-pod-logs-menu](img/deployment-menu.png)
 
